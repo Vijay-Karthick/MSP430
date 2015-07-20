@@ -1,18 +1,19 @@
 /**
- * File: main.c
- * Description: Main entry point.
+ * File: startup.h
+ * Description: Startup initialization code.
  * Author: Vijay Karthick Baskar.
  * License: Assume BSD type license and feel free to use this code.
  *			Sending me a thank you mail will do!
  */
+
+#ifndef STARTUP_H_
+#define STARTUP_H_
 
 /*
  *------------------------------------------------------------------------------
  * Include Files
  *------------------------------------------------------------------------------
  */
-
-#include "startup.h"
 
 /*
  *------------------------------------------------------------------------------
@@ -64,20 +65,12 @@
 
 /*
  *------------------------------------------------------------------------------
- * Public Function Definitions
+ * Public Function Prototypes
  *------------------------------------------------------------------------------
  */
 
-void main(void) {
-	/* Disable the watchdog */
-	disable_watchdog();
+void disable_watchdog();
+void enable_watchdog();
+void clock_init();
 
-	/* Initialize the system clock */
-	clock_init();
-
-	/* forever loop */
-	for (;;) {
-
-	}
-
-}
+#endif /* STARTUP_H_ */

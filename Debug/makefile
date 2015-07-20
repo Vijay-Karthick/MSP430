@@ -8,6 +8,7 @@ CG_TOOL_ROOT := C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_4.4.3
 
 ORDERED_OBJS += \
 "./main.obj" \
+"./startup.obj" \
 "../lnk_msp430g2553.cmd" \
 $(GEN_CMDS__FLAG) \
 -l"libc.a" \
@@ -146,8 +147,8 @@ MSP430.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)$(BIN_OUTPUTS__QUOTED)
-	-$(RM) "main.pp" 
-	-$(RM) "main.obj" 
+	-$(RM) "main.pp" "startup.pp" 
+	-$(RM) "main.obj" "startup.obj" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
