@@ -20,11 +20,16 @@
  *------------------------------------------------------------------------------
  */
 
+/* Settings for various clock frequencies */
 #define DCO_8MHZ				(DCO1|DCO0)
 #define DCO_16MHZ				(DCO2|DCO1|DCO0)
 #define RSEL_8MHZ				(RSEL3|RSEL2|RSEL0)
 #define RSEL_16MHZ				(RSEL3|RSEL2|RSEL1|RSEL0)
+
+/* Enable external resistor, as internal resistor is inaccurate */
 #define DCO_EXT_RESISTOR_ENABLE	(0x01)
+
+/* Minimum refresh value of the counter used for WDOG */
 #define MIN_REFRESH_VALUE		(10)
 
 /*
