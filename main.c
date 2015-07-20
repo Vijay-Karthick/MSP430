@@ -75,9 +75,15 @@ void main(void) {
 	/* Initialize the system clock */
 	clock_init();
 
+	/* Initialzie thw WDOG timer */
+	init_wdog();
+
+	/* Enable the WDOG */
+	enable_watchdog();
+
 	/* forever loop */
 	for (;;) {
-
+		/* Reset WDOG timer to prevent resetting the CPU */
+		reset_wdog();
 	}
-
 }

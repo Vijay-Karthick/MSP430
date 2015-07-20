@@ -25,6 +25,7 @@
 #define RSEL_8MHZ				(RSEL3|RSEL2|RSEL0)
 #define RSEL_16MHZ				(RSEL3|RSEL2|RSEL1|RSEL0)
 #define DCO_EXT_RESISTOR_ENABLE	(0x01)
+#define MIN_REFRESH_VALUE		(10)
 
 /*
  *------------------------------------------------------------------------------
@@ -49,6 +50,8 @@
  * Private Variables
  *------------------------------------------------------------------------------
  */
+
+int wdog_counter;
 
 /*
  *------------------------------------------------------------------------------
@@ -103,9 +106,27 @@ void clock_init() {
 	/* Set the sub module clock source as DCO */
 	BCSCTL2 &= ~SELS;
 
-	/* Set scaling factor for sub module clock as 1 */
-	BCSCTL2 &= ~(DIVS1 | DIVS0);
+	/* Set scaling factor for sub module clock as 8 to get 1 MHz frequency */
+	BCSCTL2 |= (DIVS1 | DIVS0);
 
 	/* Set the DCO resistor to be internal - internal resistor is not accurate */
 	BCSCTL2 &= ~DCO_EXT_RESISTOR_ENABLE;
+}
+
+void init_wdog() {
+	/**
+	 * No changes required, as SMCLK is selected with scaler as 32768 = 32.768ms timeout by default
+	 * i.e. 1/1MHz * 32768
+	 */
+}
+
+void reset_wdog() {
+	if (wdog_counter < MIN_REFRESH_VALUE) {
+		wdog_counter++;
+		return;
+	}
+	else {
+		wdog_counter = 0;
+		WDTCTL = WDTPW | WDTCNTCL;
+	}
 }

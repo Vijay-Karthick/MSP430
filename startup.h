@@ -72,5 +72,7 @@
 void disable_watchdog();
 void enable_watchdog();
 void clock_init();
+void init_wdog();
+void reset_wdog();
 
 #endif /* STARTUP_H_ */
