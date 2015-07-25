@@ -12,25 +12,13 @@
  *------------------------------------------------------------------------------
  */
 
-#include <msp430g2553.h>
+#include "startup.h"
 
 /*
  *------------------------------------------------------------------------------
  * Private Defines
  *------------------------------------------------------------------------------
  */
-
-/* Settings for various clock frequencies */
-#define DCO_8MHZ				(DCO1|DCO0)
-#define DCO_16MHZ				(DCO2|DCO1|DCO0)
-#define RSEL_8MHZ				(RSEL3|RSEL2|RSEL0)
-#define RSEL_16MHZ				(RSEL3|RSEL2|RSEL1|RSEL0)
-
-/* Enable external resistor, as internal resistor is inaccurate */
-#define DCO_EXT_RESISTOR_ENABLE	(0x01)
-
-/* Minimum refresh value of the counter used for WDOG */
-#define MIN_REFRESH_VALUE		(10)
 
 /*
  *------------------------------------------------------------------------------
@@ -134,4 +122,12 @@ void reset_wdog() {
 		wdog_counter = 0;
 		WDTCTL = WDTPW | WDTCNTCL;
 	}
+}
+
+void gpio_init() {
+	/* Settings for port 1 I/O */
+	/* Pin 0 is LED1 */
+	PORT1_GPIO_MODE(PORT1_PIN0_LED1);
+	PORT1_OUTPUT_LOW(PORT1_PIN0_LED1);
+	PORT1_DIR_OUTPUT(PORT1_PIN0_LED1);
 }

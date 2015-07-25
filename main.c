@@ -44,6 +44,8 @@
  *------------------------------------------------------------------------------
  */
 
+volatile unsigned int i;
+
 /*
  *------------------------------------------------------------------------------
  * Public Constants
@@ -78,6 +80,9 @@ void main(void) {
 	/* Initialzie thw WDOG timer */
 	init_wdog();
 
+	/* Initialize the GPIO */
+	gpio_init();
+
 	/* Enable the WDOG */
 	enable_watchdog();
 
@@ -85,5 +90,19 @@ void main(void) {
 	for (;;) {
 		/* Reset WDOG timer to prevent resetting the CPU */
 		reset_wdog();
+
+		/* Test code to blink the LED1 */
+		PORT1_OUTPUT_HIGH(PORT1_PIN0_LED1);
+		i = 100000;					// SW Delay
+		while(i != 0){
+			i--;
+			reset_wdog();
+		}
+		PORT1_OUTPUT_LOW(PORT1_PIN0_LED1);
+		i = 100000;					// SW Delay
+		while(i != 0){
+			i--;
+			reset_wdog();
+		}
 	}
 }
