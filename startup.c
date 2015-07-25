@@ -131,3 +131,27 @@ void gpio_init() {
 	PORT1_OUTPUT_LOW(PORT1_PIN0_LED1);
 	PORT1_DIR_OUTPUT(PORT1_PIN0_LED1);
 }
+
+void delay_ms(int ms) {
+	/* We compare with 30ms as the WDOG timeout value is 32.768ms */
+	/* Number of cycles for 1 second delay = 8000000 cycles */
+	/* Number of cycles for x ms delay = ((x * 8000000)/1000) cycles */
+	/* Number of cycles for 10 ms delay = ((10 * 8000000)/1000) cycles = 80000 cycles */
+	if (ms < 10) {
+		_delay_cycles(80000);
+		reset_wdog();
+	}
+	else {
+		int times = ms/10;
+		int count;
+		for (count=0; count<times; count++) {
+			_delay_cycles(80000);
+			reset_wdog();
+			if (ms%10 > 5) {
+				/* 10ms worth more clocks of delay to incorporate ms%30 remainder */
+				_delay_cycles(80000);
+				reset_wdog();
+			}
+		}
+	}
+}

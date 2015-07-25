@@ -35,11 +35,14 @@
 #define RSEL_8MHZ				(RSEL3|RSEL2|RSEL0)
 #define RSEL_16MHZ				(RSEL3|RSEL2|RSEL1|RSEL0)
 
+/* Frequency of CPU is 8MHz */
+#define F_CLOCK					(8000000)
+
 /* Enable external resistor, as internal resistor is inaccurate */
 #define DCO_EXT_RESISTOR_ENABLE	(0x01)
 
 /* Minimum refresh value of the counter used for WDOG */
-#define MIN_REFRESH_VALUE		(10)
+#define MIN_REFRESH_VALUE		(1)
 
 /* Defines for the GPIO */
 #define PORT1_PIN0_LED1			(0b00000001)
@@ -139,5 +142,6 @@ void clock_init();
 void init_wdog();
 void reset_wdog();
 void gpio_init();
+void delay_ms(int ms);
 
 #endif /* STARTUP_H_ */

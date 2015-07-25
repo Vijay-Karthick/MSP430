@@ -93,16 +93,8 @@ void main(void) {
 
 		/* Test code to blink the LED1 */
 		PORT1_OUTPUT_HIGH(PORT1_PIN0_LED1);
-		i = 100000;					// SW Delay
-		while(i != 0){
-			i--;
-			reset_wdog();
-		}
+		delay_ms(900);
 		PORT1_OUTPUT_LOW(PORT1_PIN0_LED1);
-		i = 100000;					// SW Delay
-		while(i != 0){
-			i--;
-			reset_wdog();
-		}
+		delay_ms(900);
 	}
 }
