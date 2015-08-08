@@ -7,21 +7,27 @@ CMD_SRCS += \
 ../lnk_msp430g2553.cmd 
 
 C_SRCS += \
-../main.c 
+../main.c \
+../startup.c 
 
 OBJS += \
-./main.obj 
+./main.obj \
+./startup.obj 
 
 C_DEPS += \
-./main.pp 
+./main.pp \
+./startup.pp 
 
 C_DEPS__QUOTED += \
-"main.pp" 
+"main.pp" \
+"startup.pp" 
 
 OBJS__QUOTED += \
-"main.obj" 
+"main.obj" \
+"startup.obj" 
 
 C_SRCS__QUOTED += \
-"../main.c" 
+"../main.c" \
+"../startup.c" 
 
 
