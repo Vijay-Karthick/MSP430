@@ -137,7 +137,7 @@ void delay_ms(int ms) {
 	/* Number of cycles for 1 second delay = 8000000 cycles */
 	/* Number of cycles for x ms delay = ((x * 8000000)/1000) cycles */
 	/* Number of cycles for 10 ms delay = ((10 * 8000000)/1000) cycles = 80000 cycles */
-	if (ms < 10) {
+	if (ms <= 10) {
 		_delay_cycles(80000);
 		reset_wdog();
 	}

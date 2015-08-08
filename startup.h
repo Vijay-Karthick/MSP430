@@ -41,8 +41,12 @@
 /* Enable external resistor, as internal resistor is inaccurate */
 #define DCO_EXT_RESISTOR_ENABLE	(0x01)
 
-/* Minimum refresh value of the counter used for WDOG */
-#define MIN_REFRESH_VALUE		(1)
+/*
+ * Minimum refresh value of the counter used for WDOG:
+ * value 2 indicates 20 ms; can't have value
+ * 3 as overheads cross WDOG time of 32.768ms
+ **/
+#define MIN_REFRESH_VALUE		(2)
 
 /* Defines for the GPIO */
 #define PORT1_PIN0_LED1			(0b00000001)
